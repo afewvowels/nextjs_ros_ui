@@ -13,6 +13,9 @@ const Topics = () => {
     rosConn.on('error', function() {set_msg('error')})
     rosConn.on('close', function() {set_msg('close')})
 
+
+    rosConn.connect('http://localhost:9090', function() {set_msg('connecting')})
+
     set_ros(rosConn)
   }, [ros])
 

@@ -14,13 +14,12 @@ const Topics = () => {
     rosConn.on('close', function() {set_msg('close')})
 
 
-    rosConn.connect('http://localhost:9090', function() {set_msg('connecting')})
 
     set_ros(rosConn)
   }, [ros])
 
   const getTopics = () => {
-
+    ros.connect('http://localhost:9090', function() {set_msg('connecting')})
   }
 
   return(<>

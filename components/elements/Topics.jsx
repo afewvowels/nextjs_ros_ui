@@ -19,7 +19,7 @@ const Topics = () => {
   }, [ros])
 
   const getTopics = () => {
-    ros.connect('http://localhost:9090', function() {set_msg('connecting')})
+    ros.connect('wss://localhost:9090', function() {set_msg('connecting')})
   }
 
   return(<>

@@ -15,10 +15,16 @@ const Topics = () => {
 
     set_ros(rosConn)
   }, [ros])
+
+  const getTopics = () => {
+
+  }
+
   return(<>
     <h2>Topics List</h2>
     <p>Status: {msg}</p>
     <ul></ul>
+    <button onClick={getTopics}>Get Topics</button>
   </>)
 }
 

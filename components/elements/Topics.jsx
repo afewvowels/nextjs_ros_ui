@@ -8,9 +8,7 @@ const Topics = () => {
   const [topics, set_topics] = useState('no topics polled')
 
   useEffect(() => {
-    var rosConn = new ROSLIB.Ros({
-      url: 'ws://localhost:9091'
-    })
+    var rosConn = new ROSLIB.Ros()
 
     rosConn.on('connection', function() {set_msg('connected')})
     rosConn.on('error', function() {set_msg('error')})

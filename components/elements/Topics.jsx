@@ -8,7 +8,9 @@ const Topics = () => {
   const [topics, set_topics] = useState('no topics polled')
 
   useEffect(() => {
-    var rosConn = new ROSLIB.Ros()
+    var rosConn = new ROSLIB.Ros({
+      url: 'ws://localhost:9090'
+    })
 
     rosConn.on('connection', function() {set_msg('connected')})
     rosConn.on('error', function() {set_msg('error')})
@@ -19,8 +21,12 @@ const Topics = () => {
   }, [])
 
   const getTopics = () => {
+    var rosConn = new ROSLIB.Ros({
+      url: 'ws://rbt-bertha-agx:9090'
+    })
+
     let topicsClient = new ROSLIB.Service({
-      ros: ros,
+      ros: rosConn,
       name: '/rosapi/topics',
       serviceType: 'rosapi/Topics'
     })

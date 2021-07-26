@@ -16,7 +16,7 @@ const Topics = () => {
     rosConn.on('reconnect', function() {set_msg('reconnect')})
 
     set_ros(rosConn)
-  }, [ros])
+  }, [])
 
   const getTopics = () => {
     ros.connect('wss://localhost:9090', function() {set_msg('connecting')})

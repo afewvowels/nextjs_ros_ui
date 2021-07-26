@@ -36,7 +36,6 @@ const Topics = () => {
     topicsClient.callService(request, function(result) {
       console.log("Getting topics...")
       console.log(result.topics)
-      out = result.topics
       set_topics(result.topics)
     });
   }

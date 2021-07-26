@@ -21,12 +21,8 @@ const Topics = () => {
   }, [])
 
   const getTopics = () => {
-    var rosConn = new ROSLIB.Ros({
-      url: 'ws://0.0.0.0:9090'
-    })
-
     let topicsClient = new ROSLIB.Service({
-      ros: rosConn,
+      ros: ros,
       name: '/rosapi/topics',
       serviceType: 'rosapi/Topics'
     })

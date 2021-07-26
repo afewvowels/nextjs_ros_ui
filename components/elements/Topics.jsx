@@ -29,6 +29,7 @@ const Topics = () => {
     let request = new ROSLIB.ServiceRequest()
 
     topicsClient.callService(request, function(result) {
+      console.log(result.topics)
       set_topics(result.topics)
     })
   }

@@ -55,7 +55,7 @@ const Topics = () => {
   return(<>
     <h2>Topics List</h2>
     <p>Status: {msg}</p>
-    <Image layout={responseive} alt='ROS camera tag' src="http://localhost:8080/stream?topic=/camera/color/image_raw&amp;quality=20"/>
+    <Image layout={responsive} alt='ROS camera tag' src="http://localhost:8080/stream?topic=/camera/color/image_raw&amp;quality=20"/>
     <p>Topics</p>
     <ul ref={topicsRef}></ul>
     <button onClick={getTopics}>Get Topics</button>

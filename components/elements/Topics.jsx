@@ -5,6 +5,7 @@ import ROSLIB from 'roslib'
 const Topics = () => {
   const [ros, set_ros] = useState()
   const [msg, set_msg] = useState('not set')
+  const [topics, set_topics] = useState('no topics polled')
 
   useEffect(() => {
     var rosConn = new ROSLIB.Ros()
@@ -28,13 +29,14 @@ const Topics = () => {
     let request = new ROSLIB.ServiceRequest()
 
     topicsClient.callService(request, function(result) {
-      set_msg(result.topics)
+      set_topics(result.topics)
     })
   }
 
   return(<>
     <h2>Topics List</h2>
     <p>Status: {msg}</p>
+    <p>Topics: {topics}</p>
     <ul></ul>
     <button onClick={getTopics}>Get Topics</button>
   </>)

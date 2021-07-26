@@ -12,14 +12,24 @@ const Topics = () => {
     rosConn.on('connection', function() {set_msg('connected')})
     rosConn.on('error', function() {set_msg('error')})
     rosConn.on('close', function() {set_msg('close')})
-
-
+    rosConn.on('reconnect', function() {set_msg('reconnect')})
 
     set_ros(rosConn)
   }, [ros])
 
   const getTopics = () => {
     ros.connect('wss://localhost:9090', function() {set_msg('connecting')})
+    let topicsClient = new ROSLIB.Service({
+      ros: ros,
+      name: '/rosapi/topics',
+      serviceType: 'rosapi/Topics'
+    })
+
+    let request = new ROSLIB.ServiceRequest()
+
+    topicsClient.callService(request, function(result) {
+      set_msg(result.topics)
+    })
   }
 
   return(<>

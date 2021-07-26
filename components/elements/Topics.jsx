@@ -12,16 +12,16 @@ const Topics = () => {
       var rosConn = new ROSLIB.Ros({
         url: 'ws://localhost:9090'
       })
+
+      rosConn.on('connection', function() {set_msg('connected')})
+      rosConn.on('error', function() {set_msg('error')})
+      rosConn.on('close', function() {set_msg('close')})
+      rosConn.on('reconnect', function() {set_msg('reconnect')})
+
+      set_ros(rosConn)
     } catch {
       console.error('error connecting websockets')
     }
-
-    rosConn.on('connection', function() {set_msg('connected')})
-    rosConn.on('error', function() {set_msg('error')})
-    rosConn.on('close', function() {set_msg('close')})
-    rosConn.on('reconnect', function() {set_msg('reconnect')})
-
-    set_ros(rosConn)
   }, [])
 
   const getTopics = () => {

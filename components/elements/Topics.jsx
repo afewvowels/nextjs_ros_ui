@@ -25,35 +25,6 @@ const Topics = () => {
   }, [])
 
   const getTopics = () => {
-    try {
-      var rosConn = new ROSLIB.Ros({
-        url: 'ws://rbt-bertha-agx:9090'
-      })
-    }
-    catch (e) {
-      console.error('terrible error connecting to websockets')
-    }
-
-    try {
-      let topicsClient = new ROSLIB.Service({
-        ros: rosConn,
-        name: '/rosapi/topics',
-        serviceType: 'rosapi/Topics'
-      })
-    } catch {
-      console.error('error creating topics client')
-    }
-
-    try {
-      let request = new ROSLIB.ServiceRequest()
-
-      topicsClient.callService(request, function(result) {
-        console.log(result.topics)
-        set_topics(result.topics)
-      })
-    } catch {
-      console.error('error calling service')
-    }
   }
 
   return(<>

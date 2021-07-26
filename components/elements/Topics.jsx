@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 
 import ROSLIB from 'roslib'
 
@@ -24,6 +24,17 @@ const Topics = () => {
     }
   }, [])
 
+  const topicsRef = useCallback(node => {
+    if (node != null) {
+      node.innerHTML = ''
+      topics.foreach(topic => {
+        const li = document.createElement('li')
+        li.innerHTML = topic
+        node.appendChild(li)
+      })
+    }
+  }, [topics])
+
   const getTopics = () => {
     var topicsClient = new ROSLIB.Service({
       ros : ros,
@@ -43,8 +54,8 @@ const Topics = () => {
   return(<>
     <h2>Topics List</h2>
     <p>Status: {msg}</p>
-    <p>Topics: {topics}</p>
-    <ul></ul>
+    <p>Topics</p>
+    <ul ref={topicsRef}></ul>
     <button onClick={getTopics}>Get Topics</button>
   </>)
 }

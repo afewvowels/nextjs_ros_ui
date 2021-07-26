@@ -19,7 +19,7 @@ const Topics = () => {
   }, [])
 
   const getTopics = () => {
-    ros.connect('ws://rbt-bertha-agx:9090', function() {set_msg('connecting')})
+    // ros.connect('ws://rbt-bertha-agx:9090', function() {set_msg('connecting')})
     let topicsClient = new ROSLIB.Service({
       ros: ros,
       name: '/rosapi/topics',

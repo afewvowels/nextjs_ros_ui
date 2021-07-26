@@ -21,9 +21,14 @@ const Topics = () => {
   }, [])
 
   const getTopics = () => {
-    var rosConn = new ROSLIB.Ros({
-      url: 'ws://rbt-bertha-agx:9090'
-    })
+    try {
+      var rosConn = new ROSLIB.Ros({
+        url: 'ws://rbt-bertha-agx:9090'
+      })
+    }
+    catch (e) {
+      console.error('terrible error connecting to websockets')
+    }
 
     let topicsClient = new ROSLIB.Service({
       ros: rosConn,

@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import { useEffect, useState, useCallback } from 'react'
 
 import ROSLIB from 'roslib'
@@ -46,7 +48,6 @@ const Topics = () => {
 
     topicsClient.callService(request, function(result) {
       console.log("Getting topics...")
-      console.log(result.topics)
       set_topics(result.topics)
     });
   }
@@ -54,6 +55,7 @@ const Topics = () => {
   return(<>
     <h2>Topics List</h2>
     <p>Status: {msg}</p>
+    <Image src="http://localhost:8080/stream?topic=/camera/color/image_raw&amp;quality=20"/>
     <p>Topics</p>
     <ul ref={topicsRef}></ul>
     <button onClick={getTopics}>Get Topics</button>

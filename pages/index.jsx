@@ -12,7 +12,7 @@ export default function Home() {
       <Head>
         <title>ROS Web UI</title>
         <meta name="description" content="ROS web ui nanoapp" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/robot.svg" />
       </Head>
 
       <main className={styles.main}>

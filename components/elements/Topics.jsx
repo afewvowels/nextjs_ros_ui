@@ -30,18 +30,26 @@ const Topics = () => {
       console.error('terrible error connecting to websockets')
     }
 
-    let topicsClient = new ROSLIB.Service({
-      ros: rosConn,
-      name: '/rosapi/topics',
-      serviceType: 'rosapi/Topics'
-    })
+    try {
+      let topicsClient = new ROSLIB.Service({
+        ros: rosConn,
+        name: '/rosapi/topics',
+        serviceType: 'rosapi/Topics'
+      })
+    } catch {
+      console.error('error creating topics client')
+    }
 
-    let request = new ROSLIB.ServiceRequest()
+    try {
+      let request = new ROSLIB.ServiceRequest()
 
-    topicsClient.callService(request, function(result) {
-      console.log(result.topics)
-      set_topics(result.topics)
-    })
+      topicsClient.callService(request, function(result) {
+        console.log(result.topics)
+        set_topics(result.topics)
+      })
+    } catch {
+      console.error('error calling service')
+    }
   }
 
   return(<>

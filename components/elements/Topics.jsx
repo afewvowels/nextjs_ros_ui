@@ -9,7 +9,7 @@ const Topics = () => {
 
   useEffect(() => {
     var rosConn = new ROSLIB.Ros({
-      url: 'ws://localhost:9090'
+      url: 'ws://localhost:9091'
     })
 
     rosConn.on('connection', function() {set_msg('connected')})

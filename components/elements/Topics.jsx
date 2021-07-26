@@ -5,7 +5,7 @@ import ROSLIB from 'roslib'
 const Topics = () => {
   const [ros, set_ros] = useState()
   const [msg, set_msg] = useState('not set')
-  const [topics, set_topics] = useState('no topics polled')
+  const [topics, set_topics] = useState(null)
 
   useEffect(() => {
     try {
@@ -25,9 +25,9 @@ const Topics = () => {
   }, [])
 
   const topicsRef = useCallback(node => {
-    if (node != null) {
+    if (node != null && topics != null) {
       node.innerHTML = ''
-      topics.foreach(topic => {
+      topics.forEach(topic => {
         const li = document.createElement('li')
         li.innerHTML = topic
         node.appendChild(li)

@@ -4,6 +4,8 @@ import { useEffect, useState, useCallback } from 'react'
 
 import ROSLIB from 'roslib'
 
+import styles from 'styles/Home.module.css'
+
 const Topics = () => {
   const [ros, set_ros] = useState()
   const [msg, set_msg] = useState('not set')
@@ -55,7 +57,7 @@ const Topics = () => {
   return(<>
     <h2>Topics List</h2>
     <p>Status: {msg}</p>
-    <img alt='ROS camera tag' src="http://rbt-bertha-agx:8080/stream?topic=/camera/color/image_raw&amp;quality=20"/>
+    <img className={styles.videoStream} alt='ROS camera tag' src="http://rbt-bertha-agx:8080/stream?topic=/camera/color/image_raw&amp;quality=20"/>
     <p>Topics</p>
     <ul ref={topicsRef}></ul>
     <button onClick={getTopics}>Get Topics</button>

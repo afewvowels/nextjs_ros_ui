@@ -1,3 +1,9 @@
+.videoStream {
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+}
+
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;

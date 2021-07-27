@@ -31,7 +31,8 @@ const Topics = () => {
       })
 
       battTop.subscribe(function(msg) {
-        set_battery_topic(msg)
+        console.log('msg: ' + msg)
+        // set_battery_topic(msg.data)
       })
 
       set_ros(rosConn)

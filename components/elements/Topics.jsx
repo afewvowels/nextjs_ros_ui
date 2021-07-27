@@ -30,7 +30,9 @@ const Topics = () => {
         messageType: 'String'
       })
 
-      set_battery_topic(battTop)
+      battTop.subscribe(function(msg) {
+        set_battery_topic(msg)
+      })
 
       set_ros(rosConn)
     } catch {

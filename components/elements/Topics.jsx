@@ -57,8 +57,8 @@ const Topics = () => {
   }
 
   const progressRef = useCallback(node => {
-    node.innerHTML = ''
     if (node != null && battery_topic != undefined) {
+      node.innerHTML = ''
       if (battery_topic[0] > 0) {
         const progress = document.createElement('progress')
         progress.max = 100

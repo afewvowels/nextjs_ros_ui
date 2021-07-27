@@ -24,17 +24,6 @@ const Topics = () => {
       rosConn.on('close', function() {set_msg('close')})
       rosConn.on('reconnect', function() {set_msg('reconnect')})
 
-      let battTop = new ROSLIB.Topic({
-        ros: rosConn,
-        name: 'Mecanum_Battery',
-        messageType: 'std_msgs/String'
-      })
-
-      battTop.subscribe(function(msg) {
-        console.log('msg: ' + msg)
-        // set_battery_topic(msg.data)
-      })
-
       set_ros(rosConn)
     } catch {
       console.error('error connecting websockets')
@@ -67,10 +56,24 @@ const Topics = () => {
     });
   }
 
+  const getBattery = () => {
+    let battTop = new ROSLIB.Topic({
+      ros: rosConn,
+      name: 'Mecanum_Battery',
+      messageType: 'std_msgs/String'
+    })
+
+    battTop.subscribe(function(msg) {
+      console.log('msg: ' + msg)
+      // set_battery_topic(msg.data)
+    })
+  }
+
   return(<>
     <p>Status: {msg}</p>
     <img className={styles.videoStream} alt='ROS camera tag' src={`http://rbt-bertha-agx:8080/stream?topic=/${camera_topic}&amp;quality=20`}/>
     <h2>Battery: {battery_topic}</h2>
+    <button onClick={getBattery}>Get Battery</button>
     <h2>Topics List</h2>
     <p>Topics</p>
     <ul ref={topicsRef}></ul>

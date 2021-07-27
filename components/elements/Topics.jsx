@@ -12,6 +12,7 @@ const Topics = () => {
   const [topics, set_topics] = useState(null)
   const [camera_topic, set_camera_topic] = useState('camera/color/image_raw')
   const [battery_topic, set_battery_topic] = useState()
+  const [cv_pub, set_cv_pub] = useState()
 
   useEffect(() => {
     try {
@@ -24,6 +25,13 @@ const Topics = () => {
       rosConn.on('close', function() {set_msg('close')})
       rosConn.on('reconnect', function() {set_msg('reconnect')})
 
+      cmd_vel_listener = new ROSLIB.Topic({
+        ros: ros,
+        name: '/cmd_vel',
+        messageType: 'geometry_msgs/Twist'
+      })
+
+      set_cv_pub(cmd_vel_listener)
       set_ros(rosConn)
     } catch {
       console.error('error connecting websockets')
@@ -86,6 +94,14 @@ const Topics = () => {
     })
   }
 
+  const sendCmdVel = (input) => {
+    let twist = new ROSLIB.Message({
+      linear: {x: 0, y: 0, z: 0},
+      angular: {x: 0, y: 0, z: input}
+    })
+    cv_pub.publish(twist)
+  }
+
   const batteryRef = useCallback(node => {
     if (node != null && battery_topic != undefined) {
       node.innerHTML = ''
@@ -109,6 +125,8 @@ const Topics = () => {
     <span ref={batteryRef}></span>
     <button onClick={getBattery}>Get Battery</button>
     <span ref={progressRef}></span>
+    <button onClick={sendCmdVel(-0.5)}>Left</button>
+    <button onClick={sendCmdVel(0.5)}>Right</button>
     <h2>Topics List</h2>
     <p>Topics</p>
     <ul ref={topicsRef}></ul>

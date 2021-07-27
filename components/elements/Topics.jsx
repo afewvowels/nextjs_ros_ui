@@ -65,7 +65,7 @@ const Topics = () => {
 
     battTop.subscribe(function(msg) {
       console.log('msg: ' + msg.data)
-      // set_battery_topic(msg.data)
+      set_battery_topic(msg.data)
     })
   }
 
@@ -74,6 +74,7 @@ const Topics = () => {
     <img className={styles.videoStream} alt='ROS camera tag' src={`http://rbt-bertha-agx:8080/stream?topic=/${camera_topic}&amp;quality=20`}/>
     <h2>Battery: {battery_topic}</h2>
     <button onClick={getBattery}>Get Battery</button>
+    <progress value={battery_topic[0]} max='100' />
     <h2>Topics List</h2>
     <p>Topics</p>
     <ul ref={topicsRef}></ul>

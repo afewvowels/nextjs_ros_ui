@@ -27,7 +27,7 @@ const Topics = () => {
       let battTop = new ROSLIB.Topic({
         ros: rosConn,
         name: 'Mecanum_Battery',
-        messageType: 'String'
+        messageType: 'std_msgs/String'
       })
 
       battTop.subscribe(function(msg) {

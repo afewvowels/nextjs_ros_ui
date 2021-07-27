@@ -25,13 +25,6 @@ const Topics = () => {
       rosConn.on('close', function() {set_msg('close')})
       rosConn.on('reconnect', function() {set_msg('reconnect')})
 
-      cmd_vel_listener = new ROSLIB.Topic({
-        ros: rosConn,
-        name: '/cmd_vel',
-        messageType: 'geometry_msgs/Twist'
-      })
-
-      set_cv_pub(cmd_vel_listener)
       set_ros(rosConn)
     } catch {
       console.error('error connecting websockets')
@@ -95,19 +88,31 @@ const Topics = () => {
   }
 
   const sendCmdVelLeft = () => {
+    cmd_vel_listener = new ROSLIB.Topic({
+      ros: ros,
+      name: '/cmd_vel',
+      messageType: 'geometry_msgs/Twist'
+    })
+
     let twist = new ROSLIB.Message({
       linear: {x: 0, y: 0, z: 0},
       angular: {x: 0, y: 0, z: -0.5}
     })
-    cv_pub.publish(twist)
+    cmd_vel_listener.publish(twist)
   }
 
   const sendCmdVelRight = () => {
+    cmd_vel_listener = new ROSLIB.Topic({
+      ros: ros,
+      name: '/cmd_vel',
+      messageType: 'geometry_msgs/Twist'
+    })
+
     let twist = new ROSLIB.Message({
       linear: {x: 0, y: 0, z: 0},
       angular: {x: 0, y: 0, z: 0.5}
     })
-    cv_pub.publish(twist)
+    cmd_vel_listener.publish(twist)
   }
 
   const batteryRef = useCallback(node => {

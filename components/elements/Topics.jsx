@@ -107,7 +107,6 @@ const Topics = () => {
     <p>Status: {msg}</p>
     <img className={styles.videoStream} alt='ROS camera tag' src={`http://rbt-bertha-agx:8080/stream?topic=/${camera_topic}&amp;quality=20`}/>
     <span ref={batteryRef}></span>
-    <h2>Battery: {battery_topic[0]}, {battery_topic[1]}, {battery_topic[2]}</h2>
     <button onClick={getBattery}>Get Battery</button>
     <span ref={progressRef}></span>
     <h2>Topics List</h2>

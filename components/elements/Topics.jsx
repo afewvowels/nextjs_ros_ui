@@ -94,10 +94,18 @@ const Topics = () => {
     })
   }
 
-  const sendCmdVel = (input) => {
+  const sendCmdVelLeft = () => {
     let twist = new ROSLIB.Message({
       linear: {x: 0, y: 0, z: 0},
-      angular: {x: 0, y: 0, z: input}
+      angular: {x: 0, y: 0, z: -0.5}
+    })
+    cv_pub.publish(twist)
+  }
+
+  const sendCmdVelRight = () => {
+    let twist = new ROSLIB.Message({
+      linear: {x: 0, y: 0, z: 0},
+      angular: {x: 0, y: 0, z: 0.5}
     })
     cv_pub.publish(twist)
   }
@@ -125,8 +133,8 @@ const Topics = () => {
     <span ref={batteryRef}></span>
     <button onClick={getBattery}>Get Battery</button>
     <span ref={progressRef}></span>
-    <button onClick={sendCmdVel(-0.5)}>Left</button>
-    <button onClick={sendCmdVel(0.5)}>Right</button>
+    <button onClick={sendCmdVelLeft}>Left</button>
+    <button onClick={sendCmdVelRight}>Right</button>
     <h2>Topics List</h2>
     <p>Topics</p>
     <ul ref={topicsRef}></ul>

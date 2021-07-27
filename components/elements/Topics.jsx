@@ -26,7 +26,7 @@ const Topics = () => {
       rosConn.on('reconnect', function() {set_msg('reconnect')})
 
       cmd_vel_listener = new ROSLIB.Topic({
-        ros: ros,
+        ros: rosConn,
         name: '/cmd_vel',
         messageType: 'geometry_msgs/Twist'
       })

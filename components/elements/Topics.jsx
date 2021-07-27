@@ -10,6 +10,7 @@ const Topics = () => {
   const [ros, set_ros] = useState()
   const [msg, set_msg] = useState('not set')
   const [topics, set_topics] = useState(null)
+  const [camera_topic, set_camera_topic] = useState('camera/color/image_raw')
 
   useEffect(() => {
     try {
@@ -55,9 +56,9 @@ const Topics = () => {
   }
 
   return(<>
-    <h2>Topics List</h2>
     <p>Status: {msg}</p>
-    <img className={styles.videoStream} alt='ROS camera tag' src="http://rbt-bertha-agx:8080/stream?topic=/camera/color/image_raw&amp;quality=20"/>
+    <img className={styles.videoStream} alt='ROS camera tag' src={`http://rbt-bertha-agx:8080/stream?topic=/${camera_topic}&amp;quality=20`}/>
+    <h2>Topics List</h2>
     <p>Topics</p>
     <ul ref={topicsRef}></ul>
     <button onClick={getTopics}>Get Topics</button>

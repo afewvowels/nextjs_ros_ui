@@ -88,7 +88,7 @@ const Topics = () => {
   }
 
   const sendCmdVelLeft = () => {
-    cmd_vel_listener = new ROSLIB.Topic({
+    let cmd_vel_listener = new ROSLIB.Topic({
       ros: ros,
       name: '/cmd_vel',
       messageType: 'geometry_msgs/Twist'
@@ -102,7 +102,7 @@ const Topics = () => {
   }
 
   const sendCmdVelRight = () => {
-    cmd_vel_listener = new ROSLIB.Topic({
+    let cmd_vel_listener = new ROSLIB.Topic({
       ros: ros,
       name: '/cmd_vel',
       messageType: 'geometry_msgs/Twist'

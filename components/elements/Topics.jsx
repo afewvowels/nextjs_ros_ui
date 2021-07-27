@@ -11,6 +11,7 @@ const Topics = () => {
   const [msg, set_msg] = useState('not set')
   const [topics, set_topics] = useState(null)
   const [camera_topic, set_camera_topic] = useState('camera/color/image_raw')
+  const [battery_topic, set_battery_topic] = useState()
 
   useEffect(() => {
     try {
@@ -22,6 +23,14 @@ const Topics = () => {
       rosConn.on('error', function() {set_msg('error')})
       rosConn.on('close', function() {set_msg('close')})
       rosConn.on('reconnect', function() {set_msg('reconnect')})
+
+      let battTop = new ROSLIB.Topic({
+        ros: rosConn,
+        name: 'Mecanum_Battery',
+        messageType: 'String'
+      })
+
+      set_battery_topic(battTop)
 
       set_ros(rosConn)
     } catch {
@@ -58,6 +67,7 @@ const Topics = () => {
   return(<>
     <p>Status: {msg}</p>
     <img className={styles.videoStream} alt='ROS camera tag' src={`http://rbt-bertha-agx:8080/stream?topic=/${camera_topic}&amp;quality=20`}/>
+    <h2>Battery: {battery_topic}</h2>
     <h2>Topics List</h2>
     <p>Topics</p>
     <ul ref={topicsRef}></ul>

@@ -58,16 +58,18 @@ const Topics = () => {
 
   const progressRef = useCallback(node => {
     node.innerHTML = ''
-    if (node != null && battery_topic[0] > 0) {
-      const progress = document.createElement('progress')
-      progress.max = 100
-      progress.value = battery_topic[0]
-      node.appendChild(progress)
-    } else if (node != null) {
-      const progress = document.createElement('progress')
-      progress.max = 100
-      progress.value = 0
-      node.appendChild(progress)
+    if (node != null && battery_topic != undefined) {
+      if (battery_topic[0] > 0) {
+        const progress = document.createElement('progress')
+        progress.max = 100
+        progress.value = battery_topic[0]
+        node.appendChild(progress)
+      } else {
+        const progress = document.createElement('progress')
+        progress.max = 100
+        progress.value = 0
+        node.appendChild(progress)
+      }
     }
   }, [battery_topic])
 

@@ -51,7 +51,7 @@ const Topics = () => {
 
     topicsClient.callService(request, function(result) {
       console.log("Getting topics...")
-      set_topics(result.topics)
+      set_topics(result.topics.sort())
     });
   }
 

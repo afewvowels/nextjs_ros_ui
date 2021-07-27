@@ -64,7 +64,9 @@ const Topics = () => {
     })
 
     battTop.subscribe(function(msg) {
-      console.log('msg: ' + msg)
+      msg.forEach(datum => {
+        console.log('msg: ' + datum)
+      })
       // set_battery_topic(msg.data)
     })
   }

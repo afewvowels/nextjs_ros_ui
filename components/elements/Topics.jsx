@@ -58,7 +58,7 @@ const Topics = () => {
 
   const getBattery = () => {
     let battTop = new ROSLIB.Topic({
-      ros: rosConn,
+      ros: ros,
       name: 'Mecanum_Battery',
       messageType: 'std_msgs/String'
     })

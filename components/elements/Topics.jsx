@@ -82,7 +82,7 @@ const Topics = () => {
 
     battTop.subscribe(function(msg) {
       console.log('msg: ' + msg.data)
-      set_battery_topic(msg.data)
+      set_battery_topic(msg.data.split(','))
     })
   }
 
